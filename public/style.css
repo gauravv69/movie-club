@@ -1,0 +1,510 @@
+/* -------------------------------
+   🎬 MOVIE CLUB APP STYLES
+   Author: Gaurav Kadam
+---------------------------------- */
+
+/* 🖤 Base styling */
+body {
+  font-family: "Poppins", Arial, sans-serif;
+  margin: 0;
+  background-color: #121212;
+  color: #fff;
+  line-height: 1.5;
+}
+
+/* Header Section */
+header {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: #1f1f1f;
+  border-bottom: 3px solid #ff4747;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.2rem;
+}
+
+header p {
+  font-size: 1rem;
+  color: #ccc;
+  margin: 0;
+}
+
+/* Main Layout */
+main {
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Add Movie Form */
+#add-movie {
+  width: 100%;
+  max-width: 600px;
+  background: #1c1c1c;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+}
+
+#add-movie h2 {
+  margin-top: 0;
+  color: #ff4747;
+}
+
+#movie-title,
+#movie-desc {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #2a2a2a;
+  color: #fff;
+}
+
+#movie-desc {
+  resize: none;
+  min-height: 60px;
+}
+
+#add-btn {
+  display: inline-block;
+  background: #ff4747;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+#add-btn:hover {
+  background: #ff6a6a;
+  transform: scale(1.05);
+}
+
+/* Movie List Section */
+#movie-list {
+  width: 100%;
+  max-width: 700px;
+  background: #1c1c1c;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#movie-list h2 {
+  color: #ff4747;
+  margin-bottom: 1rem;
+}
+
+/* Movie Card */
+.movie-card {
+  background: #2a2a2a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.movie-card h3 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.movie-card p {
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+/* Voting Section */
+.votes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.votes button {
+  background: none;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.votes button:hover {
+  background: #ff4747;
+  transform: scale(1.05);
+}
+
+.up-count {
+  color: #00ff7f;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.down-count {
+  color: #ff4b4b;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.total-score {
+  margin-left: 12px;
+  font-style: italic;
+  color: #ccc;
+  background: #1e1e1e;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* Remove Button */
+.remove-btn {
+  margin-top: 12px;
+  background: transparent;
+  border: 1px solid #ff4747;
+  color: #ff4747;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.remove-btn:hover {
+  background: #ff4747;
+  color: #fff;
+}
+
+/* Undo Toast Notification */
+.undo-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #222;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid #ff4747;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.3s ease;
+}
+
+.undo-toast button {
+  background: none;
+  border: none;
+  color: #ff4747;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.undo-toast button:hover {
+  color: #ff6a6a;
+}
+
+/* Simple Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  #add-movie, #movie-list {
+    padding: 1rem;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  #add-btn {
+    width: 100%;
+  }
+
+  .movie-card {
+    padding: 0.8rem;
+  }
+
+  .votes {
+    gap: 8px;
+  }
+
+  .total-score {
+    margin-left: 0;
+    margin-top: 6px;
+  }
+}
+
+
+/* LOGIN PAGE */
+.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: radial-gradient(circle at top, #1f1f1f, #121212);
+}
+
+.login-container {
+  text-align: center;
+  background: #1c1c1c;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  width: 90%;
+  max-width: 350px;
+}
+
+.login-container h1 {
+  color: #ff4747;
+}
+
+.login-container p {
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+#username-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #2a2a2a;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+#login-btn {
+  width: 100%;
+  padding: 10px;
+  background: #ff4747;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#login-btn:hover {
+  background: #ff6a6a;
+}
+
+/* Logout button */
+.logout-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: 1px solid #ff4747;
+  color: #ff4747;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #ff4747;
+  color: #fff;
+}
+
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  border: none;
+  background: #333;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tabs button:hover {
+  background: #ff4747;
+}
+
+.active-tab {
+  background: #ff4747;
+}
+
+/* No permission text */
+.no-permission {
+  font-size: 0.85rem;
+  color: #999;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* Add options */
+.add-options {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 2rem 0;
+}
+
+.option-btn {
+  background: #ff4747;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: 0.3s;
+}
+
+.option-btn:hover {
+  background: #ff6a6a;
+  transform: scale(1.05);
+}
+
+/* Modal popup */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #1c1c1c;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #2a2a2a;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.modal-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+#save-btn {
+  background: #ff4747;
+  color: #fff;
+}
+
+#cancel-btn {
+  background: #444;
+  color: #fff;
+}
+
+#cancel-btn:hover {
+  background: #666;
+}
+
+
+/* Main container that centers everything */
+.content-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Common container style for Movies and Web Series */
+.item-container {
+  background: #1c1c1c;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.item-container h2 {
+  color: #ff4747;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid #333;
+  padding-bottom: 8px;
+}
+
+/* Movie and Series cards inside each container */
+.movie-card {
+  background: #2a2a2a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}

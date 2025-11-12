@@ -1,11 +1,7 @@
 {
-  "builds": [
-    { "src": "*.html", "use": "@vercel/static" },
-    { "src": "*.css", "use": "@vercel/static" },
-    { "src": "*.js", "use": "@vercel/static" }
-  ],
-  "routes": [
-    { "src": "/home", "dest": "/home.html" },
-    { "src": "/", "dest": "/index.html" }
+  "public": "public",
+  "rewrites": [
+    { "source": "/home", "destination": "/home.html" },
+    { "source": "/", "destination": "/index.html" }
   ]
 }
