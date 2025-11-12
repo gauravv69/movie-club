@@ -1,7 +1,9 @@
 {
-  "public": "public",
-  "rewrites": [
-    { "source": "/home", "destination": "/home.html" },
-    { "source": "/", "destination": "/index.html" }
+  "builds": [
+    { "src": "public/**/*", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/home", "dest": "/public/home.html" },
+    { "src": "/", "dest": "/public/index.html" }
   ]
 }
