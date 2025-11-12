@@ -13,5 +13,5 @@ loginBtn.addEventListener("click", () => {
   localStorage.setItem("movieClubUser", username);
 
   // Redirect to main app page
-  window.location.href = "/home";
+  window.location.href = "/home.html";
 });
