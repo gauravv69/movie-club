@@ -201,3 +201,34 @@ function showAlert(message) {
 
 // ---------- START ----------
 listenForChanges();
+
+saveBtn.addEventListener("click", () => {
+  console.log("Add button clicked ✅");
+
+  const title = itemTitle.value.trim();
+  const desc = itemDesc.value.trim();
+
+  if (!title) return alert("Please enter a title!");
+
+  const newItem = {
+    title,
+    desc,
+    user: currentUser,
+    upvotes: 0,
+    downvotes: 0,
+  };
+
+  console.log("Saving to Firebase:", newItem);
+
+  const listRef = ref(db, currentType === "movie" ? "movies" : "series");
+  const newRef = push(listRef);
+  set(newRef, newItem)
+    .then(() => {
+      console.log("✅ Data added successfully");
+      modal.classList.add("hidden");
+    })
+    .catch((error) => {
+      console.error("❌ Error adding data:", error);
+      alert("Error saving data. Check console for details.");
+    });
+});
