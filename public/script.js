@@ -3,7 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebas
 import { getDatabase, ref, push, set, onValue, remove, update }
   from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
-// Your Firebase config (from your firebase.js)
+// Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyANMbzzi8CseDyrzdROGDkx3qhHnlD8krs",
   authDomain: "movie-club-app-60152.firebaseapp.com",
@@ -17,7 +17,6 @@ const firebaseConfig = {
 // Initialize Firebase & Database
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-
 
 // ---------- UI ELEMENTS ----------
 const addMovieBtn = document.getElementById("add-movie-btn");
@@ -62,14 +61,17 @@ cancelBtn.addEventListener("click", () => modal.classList.add("hidden"));
 
 // ---------- ADD MOVIE / SERIES ----------
 saveBtn.addEventListener("click", () => {
+  console.log("Add button clicked ✅");
+
   const title = itemTitle.value.trim();
   const desc = itemDesc.value.trim();
 
   if (!title) return alert("Please enter a title!");
+  if (!currentType) return alert("Please select Movie or Web Series!");
 
   const listRef = ref(db, currentType === "movie" ? "movies" : "series");
 
-  // Check for duplicate (optional but good)
+  // Check for duplicate
   onValue(listRef, (snapshot) => {
     const data = snapshot.val() || {};
     const exists = Object.values(data).some(
@@ -90,24 +92,21 @@ saveBtn.addEventListener("click", () => {
     };
 
     const newItemRef = push(listRef);
-    set(newItemRef, newItem);
-    lastAddedKey = newItemRef.key;
-    modal.classList.add("hidden");
-    showUndoNotification();
+    set(newItemRef, newItem)
+      .then(() => {
+        console.log("✅ Data added successfully:", newItem);
+        lastAddedKey = newItemRef.key;
+        modal.classList.add("hidden");
+        showUndoNotification();
+      })
+      .catch((error) => {
+        console.error("❌ Error adding data:", error);
+        alert("Error saving data. Check console for details.");
+      });
   }, { onlyOnce: true });
 });
 
 // ---------- DISPLAY ITEMS ----------
-function listenForChanges() {
-  onValue(ref(db, "movies"), (snapshot) => {
-    displayCategory(moviesDiv, snapshot.val(), "movie");
-  });
-
-  onValue(ref(db, "series"), (snapshot) => {
-    displayCategory(seriesDiv, snapshot.val(), "series");
-  });
-}
-
 function displayCategory(container, data, type) {
   container.innerHTML = "";
 
@@ -200,48 +199,11 @@ function showAlert(message) {
   }, 2000);
 }
 
-// ---------- START ----------
-listenForChanges();
-
-saveBtn.addEventListener("click", () => {
-  console.log("Add button clicked ✅");
-
-  const title = itemTitle.value.trim();
-  const desc = itemDesc.value.trim();
-
-  if (!title) return alert("Please enter a title!");
-
-  const newItem = {
-    title,
-    desc,
-    user: currentUser,
-    upvotes: 0,
-    downvotes: 0,
-  };
-
-  console.log("Saving to Firebase:", newItem);
-
-  const listRef = ref(db, currentType === "movie" ? "movies" : "series");
-  const newRef = push(listRef);
-  set(newRef, newItem)
-    .then(() => {
-      console.log("✅ Data added successfully");
-      modal.classList.add("hidden");
-    })
-    .catch((error) => {
-      console.error("❌ Error adding data:", error);
-      alert("Error saving data. Check console for details.");
-    });
-});
-
-
-// 🔁 Listen for Realtime Updates from Firebase
+// ---------- LIVE UPDATES ----------
 onValue(ref(db, "movies"), (snapshot) => {
-  const data = snapshot.val();
-  displayCategory(moviesDiv, data, "movie");
+  displayCategory(moviesDiv, snapshot.val(), "movie");
 });
 
 onValue(ref(db, "series"), (snapshot) => {
-  const data = snapshot.val();
-  displayCategory(seriesDiv, data, "series");
+  displayCategory(seriesDiv, snapshot.val(), "series");
 });
