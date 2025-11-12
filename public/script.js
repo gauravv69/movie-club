@@ -110,6 +110,7 @@ function listenForChanges() {
 
 function displayCategory(container, data, type) {
   container.innerHTML = "";
+
   if (!data) {
     container.innerHTML = "<p>No items added yet.</p>";
     return;
@@ -231,4 +232,16 @@ saveBtn.addEventListener("click", () => {
       console.error("❌ Error adding data:", error);
       alert("Error saving data. Check console for details.");
     });
+});
+
+
+// 🔁 Listen for Realtime Updates from Firebase
+onValue(ref(db, "movies"), (snapshot) => {
+  const data = snapshot.val();
+  displayCategory(moviesDiv, data, "movie");
+});
+
+onValue(ref(db, "series"), (snapshot) => {
+  const data = snapshot.val();
+  displayCategory(seriesDiv, data, "series");
 });
